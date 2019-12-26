@@ -12,14 +12,10 @@ Plot data for a particilar police code:
 
 Examples:
 
-- Local police collaborates with other services (e.g., State Police)
-![Code 305](codi_305.png)
+![Code 305](codi_305.png "Local police collaborates with other services (e.g., State Police)")
 
-- Drugs
-![Code 620](codi_620.png)
+![Code 620](codi_620.png "Drugs")
 
-- Domestic violence
-![Code 660](codi_660.png)
+![Code 660](codi_660.png "Domestic violence")
 
-- Aggressions
-![Code 670](codi_670.png)
+![Code 670](codi_670.png "Aggressions")
