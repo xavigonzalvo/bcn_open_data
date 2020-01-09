@@ -6,7 +6,7 @@ import pickle
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('action', 'create_data', 'One of {`create_data`, `plot`}.')
-flags.DEFINE_string('codi', '-1', 'Codi to create figure with.')
+flags.DEFINE_string('code', '-1', 'Codi to create figure with.')
 flags.DEFINE_string('output', None, 'Path to the save the output.')
 
 _YEARS = [2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
@@ -19,6 +19,7 @@ def _create_data():
   """
 
   data = []
+  codes = {}
   for year in _YEARS:
     print(year)
     filename = '{}_incidents_gestionats_gub.csv'.format(year)
@@ -26,31 +27,40 @@ def _create_data():
     data_year = {}
     for _, entry in one_year.iterrows():
       if 'Codi Incident' in entry:
-        codi = entry['Codi Incident']
+        code = entry['Codi Incident']
+        if code not in codes:
+          codes[code] = entry['Descripció Incident']
       elif 'Codi_Incident' in entry:
-        codi = entry['Codi_Incident']
-      if codi in data_year:
-        data_year[codi] += 1
+        code = entry['Codi_Incident']
+        if code not in codes:
+          codes[code] = entry['Descripcio_Incident']
+      if code in data_year:
+        data_year[code] += 1
       else:
-        data_year[codi] = 0
+        data_year[code] = 0
     data.append(data_year)
   with open('data.pkl', 'wb') as f:
     pickle.dump(data, f)
+  with open('codes.pkl', 'wb') as f:
+    pickle.dump(codes, f)
 
 
 def _plot():
   with open('data.pkl', 'rb') as f:
     data = pickle.load(f)
+  with open('codes.pkl', 'rb') as f:
+    codes = pickle.load(f)
 
   items = []
   for entry in data:
-    items.append(entry[FLAGS.codi])
+    items.append(entry[FLAGS.code])
 
   plt.plot(_YEARS, items, 'o-')
   plt.xlabel('Any')
   plt.ylabel('Número de casos')
+  plt.title(codes[FLAGS.code].strip().replace(',', '.'))
   plt.grid()
-  plt.savefig('codi_{}.png'.format(FLAGS.codi), dpi=600)
+  plt.savefig('codi_{}.png'.format(FLAGS.code), dpi=600)
 
 
 def _find_worst():
@@ -58,6 +68,8 @@ def _find_worst():
 
   with open('data.pkl', 'rb') as f:
     data = pickle.load(f)
+  with open('codes.pkl', 'rb') as f:
+    codes = pickle.load(f)
 
   out = {}
   data_2010 = data[0]
@@ -68,9 +80,10 @@ def _find_worst():
     out[code] = data_last_year[code] - count
 
   with open(FLAGS.output, 'wt') as f:
-    f.write('code,count\n')
+    f.write('code,description,count\n')
     for key, count in out.items():
-      f.write('{},{}\n'.format(key, count))
+      f.write('{},{},{}\n'.format(key, codes[key].strip().replace(',', '.'),
+                                  count))
 
 
 def main(argv):
