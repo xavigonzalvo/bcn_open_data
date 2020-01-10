@@ -51,16 +51,23 @@ def _plot():
   with open('codes.pkl', 'rb') as f:
     codes = pickle.load(f)
 
-  items = []
-  for entry in data:
-    items.append(entry[FLAGS.code])
+  colors = ['r', 'b', 'd', 'g', 'c']
+  legend = []
+  for i, code in enumerate(FLAGS.code.split(',')):
+    items = []
+    for entry in data:
+      items.append(entry[code])
+    plt.plot(_YEARS, items, '{}o-'.format(colors[i]))
+    legend.append(codes[code].strip().replace(',', '.'))
 
-  plt.plot(_YEARS, items, 'o-')
   plt.xlabel('Any')
   plt.ylabel('Número de casos')
-  plt.title(codes[FLAGS.code].strip().replace(',', '.'))
+  if ',' not in FLAGS.code:
+    plt.title(codes[code].strip().replace(',', '.'))
+  else:
+    plt.legend(legend)
   plt.grid()
-  plt.savefig('codi_{}.png'.format(FLAGS.code), dpi=600)
+  plt.savefig('codi_{}.png'.format(FLAGS.code.replace(',', '_')), dpi=600)
 
 
 def _find_worst():
