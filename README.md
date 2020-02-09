@@ -29,7 +29,7 @@ generate data across all codes between the years 2010 and the 2018:
 You can then analyze that data with your favorite tool, in a spreadsheet for
 example.
 
-<center><img src="all_codes.png" width="70%"></center>
+<center><img src="all_codes.png" width="100%"></center>
 
 ## Examples
 
@@ -39,16 +39,16 @@ example.
 
 - Local police collaborates with other services (e.g., State Police)
 
-<center><img src="codi_305.png" width="70%"></center>
+<center><img src="codi_305.png" width="50%"></center>
 
 - Drugs
 
-<center><img src="codi_620.png" width="70%"></center>
+<center><img src="codi_620.png" width="50%"></center>
 
 - Domestic violence
 
-<center><img src="codi_660.png" width="70%"></center>
+<center><img src="codi_660.png" width="50%"></center>
 
 - Aggressions
 
-<center><img src="codi_670.png" width="70%"></center>
+<center><img src="codi_670.png" width="50%"></center>
