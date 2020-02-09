@@ -5,7 +5,7 @@ from absl import flags
 import pickle
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('action', 'create_data', 'One of {`create_data`, `plot`}.')
+flags.DEFINE_string('action', 'create_data', 'One of {`create_data`, `plot`, `find_worst`}.')
 flags.DEFINE_string('code', '-1', 'Codi to create figure with.')
 flags.DEFINE_string('output', None, 'Path to the save the output.')
 
@@ -67,7 +67,7 @@ def _plot():
   else:
     plt.legend(legend)
   plt.grid()
-  plt.savefig('codi_{}.png'.format(FLAGS.code.replace(',', '_')), dpi=600)
+  plt.savefig('code_{}.png'.format(FLAGS.code.replace(',', '_')), dpi=600)
 
 
 def _find_worst():

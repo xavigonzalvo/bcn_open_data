@@ -2,17 +2,40 @@
 
 Data extracted from the [OpenData website](https://opendata-ajuntament.barcelona.cat/data/en/dataset/incidents-gestionats-gub).
 
-A simple analysis of incidents managed by the local police in Barcelona.
+## Parse data
 
-    # Parse data.
-    python delitos_bcn.py --create_data
+First step is to parse the data into some data structure. The following does a
+simple analysis of incidents managed by the local police in Barcelona. Specifically,
+it generates two files (`data.pkl` and `codes.pkl`) that contain the data and the
+corresponding police code descriptions.
 
-Plot data for a particilar police code:
+    python delitos_bcn.py --action="create_data"
 
-    python delitos_bcn.py --create_data=false --codi 620
+## Plot data for a code
 
+In order to plot the evolution of a particular police code:
 
-Examples:
+    python delitos_bcn.py --action="plot" --code 620
+
+This generate a file `code_{code_number}.png` with the data of that code.
+
+## Find significant changes across all codes
+
+In order to have a better idea of what's going on in the city, you can also
+generate data across all codes between the years 2010 and the 2018:
+
+    python delitos_bcn.py --action="find_worst" --output all_codes.csv
+
+You can then analyze that data with your favorite tool, in a spreadsheet for
+example.
+
+<center><img src="all_codes.png" width="70%"></center>
+
+## Examples
+
+- We can combine two different codes (e.g., 20 and 22, for rain and snow, respectively):
+
+<center><img src="codi_20_22.png" width="70%"></center>
 
 - Local police collaborates with other services (e.g., State Police)
 
