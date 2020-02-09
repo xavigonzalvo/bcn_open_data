@@ -41,7 +41,7 @@ so a decreasing trend.
 
 - We can combine two different codes (e.g., 20 and 22, for rain and snow, respectively):
 
-<center><img src="codi_20_22.png" width="70%"></center>
+<center><img src="codi_20_22.png" width="50%"></center>
 
 - Local police collaborates with other services (e.g., State Police)
 
