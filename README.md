@@ -2,6 +2,10 @@
 
 Data extracted from the [OpenData website](https://opendata-ajuntament.barcelona.cat/data/en/dataset/incidents-gestionats-gub).
 
+## Requirements
+
+Python 3.7.5
+
 ## Parse data
 
 First step is to parse the data into some data structure. The following does a
@@ -26,8 +30,10 @@ generate data across all codes between the years 2010 and the 2018:
 
     python delitos_bcn.py --action="find_worst" --output all_codes.csv
 
-You can then analyze that data with your favorite tool, in a spreadsheet for
-example.
+You can then analyze that data with your favorite tool, in a [spreadsheet](https://docs.google.com/spreadsheets/d/1-xqdqAbpa1koEJpTd5OjUGZeO_0pZtDLAMO1uHMa7xw/edit#gid=2099034012) for
+example. Positive numbers indicate 2018 has more cases than 2010, so an
+increasing trend. A negative number indicates that 2018 has more cases than 2010,
+so a decreasing trend.
 
 <center><img src="all_codes.png" width="100%"></center>
 
